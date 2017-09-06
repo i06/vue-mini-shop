@@ -20,7 +20,7 @@ module.exports = {
       : config.dev.assetsPublicPath
   },
   resolve: {
-    extensions: ['.js', '.vue', '.json'],
+    extensions: ['.js', '.vue', '.json', '.styl'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
@@ -29,7 +29,7 @@ module.exports = {
   },
   module: {
     rules: [
-      {
+      /* {
         test: /\.(js|vue)$/,
         loader: 'eslint-loader',
         enforce: 'pre',
@@ -37,16 +37,21 @@ module.exports = {
         options: {
           formatter: require('eslint-friendly-formatter')
         }
-      },
+      }, */
       {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: vueLoaderConfig
       },
       {
+        test: /\.styl$/,
+        loader: 'style-loader!css-loader!stylus-loader',
+        include: [resolve('src')]
+      },
+      {
         test: /\.js$/,
         loader: 'babel-loader',
-        include: [resolve('src'), resolve('test')]
+        include: [resolve('src/assets/stylus')]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
